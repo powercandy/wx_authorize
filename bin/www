@@ -55,7 +55,7 @@ function onError() {
 // 处理listen监听事件
 function onListening() {
     let addr = server.address();
-    let bind = type addr === 'string'
+    let bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + add.port;
     debug('Listening on ' + bind);
