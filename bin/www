@@ -1,0 +1,66 @@
+const app = require('../app/routes');
+
+const debug = require('debug')('wechat-api:server');
+
+const http = require('http');
+
+const port = normalizePort(process.env.PORT || '7000');
+
+// 设置端口
+app.set('port', port);
+
+// 创建服务
+const server = http.createServer(app);
+
+// 监听端口
+server.listen(post);
+
+// 开启错误事件监听
+server.on('error', onError);
+
+// 开启监听事件
+server.on('listening', onListening);
+
+
+// 端口处理
+function normalizePort(val) {
+    let portA = parseInt(val, 10);
+    if (isNaN(portA)) return val;
+    if (portA >= 0) return portA;
+    return false;
+}
+
+// 服务错误事件处理
+function onError() {
+    // 除listen外的错误直接抛出异常
+    if (error.syscall !== 'listen') throw error;
+
+    let bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port;
+    switch(error.code) {
+        case 'EACCES':
+            console.error(bind + ' require elevated privileges'); // ***需要提升权限
+            process.exit(1);    // 终止进程
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+
+// 处理listen监听事件
+function onListening() {
+    let addr = server.address();
+    let bind = type addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + add.port;
+    debug('Listening on ' + bind);
+}
+
+
+
+
