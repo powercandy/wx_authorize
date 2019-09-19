@@ -24,23 +24,22 @@ router.get('/token', (req, res, next) => {
     res.send(req.query.echostr || 'undefined');
     return;
     let signature = req.query.signature;
+    let echostr = req.query.echostr;
+
     let nonce = req.query.nonce;
     let timestamp = req.query.timestamp;
-    let echostr = req.query.echostr;
     let token = wxConfig.token;
     let str = [token, timestamp, nonce].sort().join('');
-    let sha = sha1(str);
-    res.send(echostr);
-    return;
-    if (sha === signature) {
-        console.log('send')
+    let shaResult = sha1(str);
+    // res.send(echostr);
+    // return;
+    if (shaResult === signature) {
         res.send(echostr);
     } else {
-        res.result = {
+        res.send({
             code: -1,
             error: 'valid error'
-        }
-        res.send(res.result);
+        });
     }
 });
 
