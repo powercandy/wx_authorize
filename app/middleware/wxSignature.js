@@ -22,11 +22,9 @@ exports.getTicket = (req, res, next) => {
 exports.getSignature = (req, res, next) => {
     let ticket = req.ticket;
     let timestamp = parseInt(new Date().getTime() / 1000);
-    let url = req.query.url;
-    console.log('url: ' + url);
     let noncestr = crypto.randomBytes(8).toString('hex');
 
-    let str = [`jsapi_ticket=${ticket}`, `noncestr=${noncestr}`, `timestamp=${timestamp}`, `url=${url}`].sort().join("&");
+    let str = [`jsapi_ticket=${ticket}`, `noncestr=${noncestr}`, `timestamp=${timestamp}`, `token=${wxConfig.token}`].sort().join("&");
 
     let signature = sha1(str);
     req.result = {
