@@ -6,6 +6,8 @@ const wxConfig = require('../../config/wxConfig');
 
 const sha1 = require("sha1");
 
+const log = require("./config/log");
+
 // const wxAuth = require('../middleware/wxAuth.js');
 
 const router = express.Router();
@@ -33,6 +35,7 @@ router.get('/token', (req, res, next) => {
     let shaResult = sha1(str);
     // res.send(echostr);
     // return;
+    log.out(shaResult);
     if (shaResult === signature) {
         res.send(echostr);
     } else {
