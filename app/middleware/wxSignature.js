@@ -14,6 +14,7 @@ exports.getAccessToken = (req, res, next) => {
 
 exports.getTicket = (req, res, next) => {
     let access_token = req.access_token;
+    console.log('getTicket-access_token: ' + access_token);
     let url = `https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=${access_token}&type=jsapi`;
     redisClient.setItem(url, req, 'ticket', next);
 }
