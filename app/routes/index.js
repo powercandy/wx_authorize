@@ -20,6 +20,7 @@ router.get('/signature', wxSignature.getAccessToken, wxSignature.getTicket, wxSi
 
 // 接口 -- 验证token
 router.get('/token', (req, res, next) => {
+    console.log('处理返回信息');
     let signature = req.query.signature;
     let nonce = req.query.nonce;
     let timestamp = req.query.timestamp;
