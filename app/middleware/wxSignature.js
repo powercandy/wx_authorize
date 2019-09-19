@@ -26,7 +26,6 @@ exports.getSignature = (req, res, next) => {
 
     let str = [`jsapi_ticket=${ticket}`, `noncestr=${noncestr}`, `timestamp=${timestamp}`, `url=${url}`].sort().join("&");
 
-    console.log(str);
     let signature = sha1(str);
     req.result = {
         signature: signature,
