@@ -35,7 +35,7 @@ router.get('/token', (req, res, next) => {
     let shaResult = sha1(str);
     // res.send(echostr);
     // return;
-    log.out(shaResult);
+    log.out('signature:  ' + shaResult);
     if (shaResult === signature) {
         res.send(echostr);
     } else {
