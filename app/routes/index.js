@@ -6,7 +6,7 @@ const wxConfig = require('../../config/wxConfig');
 
 const sha1 = require("sha1");
 
-const log = require("./config/log");
+const log = require("../../config/log");
 
 // const wxAuth = require('../middleware/wxAuth.js');
 
