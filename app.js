@@ -28,6 +28,25 @@ app.use(cookieParser());                                    // 中间件处理 -
 
 app.use('/', index);                                        // 中间件处理 -- 路由控制
 
+const log = require("./config/log");
+// logger
+app.all("*", async (req, res, next) => {
+    //响应开始时间
+    const start = new Date();
+    //响应间隔时间
+    var ms;
+    ms = new Date() - start;
+    try {
+        //开始进入到下一个中间件
+        await next();
+        //记录响应日志
+        log.i(req, ms);
+    } catch (error) {
+        //记录异常日志
+        log.e(req, error, ms);
+    }
+   log.out(`${req.method} ${req.url} - ${ms}ms-${res.statusCode}`);
+});
 
 app.use(function(err, req, res, next){
     res.locals.message = err.message;
