@@ -22,9 +22,8 @@ router.get('/signature', wxSignature.getAccessToken, wxSignature.getTicket, wxSi
 
 // 接口 -- 验证token
 router.get('/token', (req, res, next) => {
-    console.log(req.query);
-    res.send(req.query.echostr || 'undefined');
-    return;
+    // res.send(req.query.echostr || 'undefined');
+    // return;
     let signature = req.query.signature;
     let echostr = req.query.echostr;
 
@@ -33,10 +32,7 @@ router.get('/token', (req, res, next) => {
     let token = wxConfig.token;
     let str = [token, timestamp, nonce].sort().join('');
     let shaResult = sha1(str);
-    // res.send(echostr);
-    // return;
-    console.log('signature:  ' + shaResult);
-    // log.out('signature:  ' + shaResult);
+    log.out('signature:  ' + shaResult);
     if (shaResult === signature) {
         res.send(echostr);
     } else {
