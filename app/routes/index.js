@@ -2,6 +2,10 @@ const express = require('express');
 
 const wxSignature = require('../middleware/wxSignature.js');
 
+const wxConfig = require('../../config/wxConfig');
+
+const sha1 = require("sha1");
+
 // const wxAuth = require('../middleware/wxAuth.js');
 
 const router = express.Router();
@@ -12,6 +16,25 @@ router.get('/signature', wxSignature.getAccessToken, wxSignature.getTicket, wxSi
         code: 0,
         data: req.result
     });
+});
+
+// 接口 -- 验证token
+routre.get('/token', (req, res, next) => {
+    let signature = req.query.signature;
+    let nonce = req.query.nonce;
+    let timestamp = req.query.timestamp;
+    let echostr = req.query.echostr;
+    let token = wxConfig.token;
+    let str = [token, timestamp, nonce].sort().join('');
+    let sha = sha1(str);
+    if (sha === signature) {
+        res.send(echostr);
+    } else {
+        res.result({
+            code: -1,
+            error: 'valid error'
+        })
+    }
 });
 
 // 微信授权
