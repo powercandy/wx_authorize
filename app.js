@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));    // 中间件处理 -
 
 app.use(bodyParser.json());                                 // 中间件处理 -- 请求体json格式化
 
-app.use(bodyParser.unlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());                                    // 中间件处理 -- cookie处理
 
 app.use('/', index);                                        // 中间件处理 -- 路由控制
