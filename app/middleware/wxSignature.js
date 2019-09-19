@@ -30,7 +30,7 @@ exports.getSignature = (req, res, next) => {
     let signature = sha1(str);
     req.result = {
         signature: signature,
-        appId: appId,
+        appId: wxConfig.appId,
         timestamp: timestamp,
         nonceStr: noncestr
     };
