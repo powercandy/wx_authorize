@@ -4,7 +4,7 @@ const debug = require('debug')('wechat-api:server');
 
 const http = require('http');
 
-const port = normalizePort(process.env.PORT || '7000');
+const port = normalizePort(process.env.PORT || '80');
 
 // 设置端口
 app.set('port', port);

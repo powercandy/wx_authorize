@@ -1,6 +1,6 @@
 const express = require('express');
 
-const wxSignature = require('../middleware/wxSignature.js');
+// const wxSignature = require('../middleware/wxSignature.js');
 
 const wxConfig = require('../../config/wxConfig');
 
@@ -20,7 +20,9 @@ router.get('/signature', wxSignature.getAccessToken, wxSignature.getTicket, wxSi
 
 // 接口 -- 验证token
 router.get('/token', (req, res, next) => {
-    console.log('处理返回信息');
+    console.log(req.query);
+    res.send(req.query.echostr || 'undefined');
+    return;
     let signature = req.query.signature;
     let nonce = req.query.nonce;
     let timestamp = req.query.timestamp;
@@ -28,13 +30,17 @@ router.get('/token', (req, res, next) => {
     let token = wxConfig.token;
     let str = [token, timestamp, nonce].sort().join('');
     let sha = sha1(str);
+    res.send(echostr);
+    return;
     if (sha === signature) {
+        console.log('send')
         res.send(echostr);
     } else {
         res.result = {
             code: -1,
             error: 'valid error'
         }
+        res.send(res.result);
     }
 });
 
