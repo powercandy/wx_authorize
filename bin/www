@@ -31,7 +31,7 @@ function normalizePort(val) {
 }
 
 // 服务错误事件处理
-function onError() {
+function onError(error) {
     // 除listen外的错误直接抛出异常
     if (error.syscall !== 'listen') throw error;
 
