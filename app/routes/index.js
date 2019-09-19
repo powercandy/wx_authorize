@@ -30,10 +30,10 @@ router.get('/token', (req, res, next) => {
     if (sha === signature) {
         res.send(echostr);
     } else {
-        res.result({
+        res.result = {
             code: -1,
             error: 'valid error'
-        })
+        }
     }
 });
 
