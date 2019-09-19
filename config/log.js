@@ -15,6 +15,9 @@ log.e = function(ctx, error, resTime) {
         errorLog.error(formatError(ctx, error, resTime));
     }
 };
+log.out = (string) => {
+    resLog.info(string)
+};
 
 //格式化请求日志
 var formatReqLog = function(req, resTime) {
