@@ -1,6 +1,6 @@
 const express = require('express');
 
-// const wxSignature = require('../middleware/wxSignature.js');
+const wxSignature = require('../middleware/wxSignature.js');
 
 const wxConfig = require('../../config/wxConfig');
 
