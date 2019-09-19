@@ -26,8 +26,6 @@ app.use(bodyParser.json());                                 // 中间件处理 -
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());                                    // 中间件处理 -- cookie处理
 
-app.use('/', index);                                        // 中间件处理 -- 路由控制
-
 const log = require("./config/log");
 // logger
 app.all("*", async (req, res, next) => {
@@ -45,8 +43,12 @@ app.all("*", async (req, res, next) => {
         //记录异常日志
         log.e(req, error, ms);
     }
-   log.out(`${req.method} ${req.url} - ${ms}ms-${res.statusCode}`);
+    log.out(`${req.method} ${req.url} - ${ms}ms-${res.statusCode}`);
 });
+
+app.use('/', index);                                        // 中间件处理 -- 路由控制
+
+
 
 app.use(function(err, req, res, next){
     res.locals.message = err.message;
