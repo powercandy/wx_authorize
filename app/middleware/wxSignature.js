@@ -30,7 +30,7 @@ exports.getSignature = (req, res, next) => {
     log.out('timestamp --- ' + timestamp);
     log.out('ticket --- ' + ticket);
     log.out('noncestr --- ' + noncestr);
-    log.out(req.Referer);
+    log.out(req.headers.referer);
     log.out('str --- ' + str);
     log.out('signature --- ' + signature);
     req.result = {
