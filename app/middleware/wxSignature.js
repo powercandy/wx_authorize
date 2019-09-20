@@ -6,6 +6,7 @@ const redisClient = require('./redis');
 const sha1 = require("sha1");
 
 const crypto = require("crypto");
+const log = require("./config/log");
 
 exports.getAccessToken = (req, res, next) => {
     let url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${wxConfig.appId}&secret=${wxConfig.appSecret}`;
@@ -24,10 +25,14 @@ exports.getSignature = (req, res, next) => {
     let timestamp = parseInt(new Date().getTime() / 1000);
     let url = req.query.url;
     let noncestr = crypto.randomBytes(8).toString('hex');
-
     let str = [`jsapi_ticket=${ticket}`, `noncestr=${noncestr}`, `timestamp=${timestamp}`, `url=${url}`].sort().join("&");
-
     let signature = sha1(str);
+    log.out('timestamp --- ' + timestamp);
+    log.out('ticket --- ' + ticket);
+    log.out('noncestr --- ' + noncestr);
+    log.out('url --- ' + url);
+    log.out('str --- ' + str);
+    log.out('signature --- ' + signature);
     req.result = {
         signature: signature,
         appId: wxConfig.appId,
