@@ -6,7 +6,7 @@ const redisClient = require('./redis');
 const sha1 = require("sha1");
 
 const crypto = require("crypto");
-const log = require("./config/log");
+const log = require("../../config/log");
 
 exports.getAccessToken = (req, res, next) => {
     let url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${wxConfig.appId}&secret=${wxConfig.appSecret}`;
